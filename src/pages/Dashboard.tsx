@@ -6,6 +6,7 @@ import ExpenseChart from '@/components/ExpenseChart';
 import StatCard from '@/components/StatCard';
 import { Wallet, TrendingDown, Calendar, Receipt } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { formatINR } from '@/utils/currency';
 
 const Dashboard = () => {
   const { expenses, loading } = useExpenses();
@@ -49,16 +50,21 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground mt-1">Track your spending for {currentMonthName}</p>
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+          <p className="text-muted-foreground mt-1">Track your spending for {currentMonthName}</p>
+        </div>
+        <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full w-fit">
+          Currency: INR (₹)
+        </span>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <StatCard
           title="Total Expenses"
-          value={`$${stats.total.toFixed(2)}`}
+          value={formatINR(stats.total)}
           icon={Wallet}
           subtitle={currentMonthName}
           variant="highlight"
@@ -71,7 +77,7 @@ const Dashboard = () => {
         />
         <StatCard
           title="Daily Average"
-          value={`$${stats.avgPerDay.toFixed(2)}`}
+          value={formatINR(stats.avgPerDay)}
           icon={TrendingDown}
           subtitle="Per day this month"
         />

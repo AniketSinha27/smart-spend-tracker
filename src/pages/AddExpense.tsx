@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
-import { PlusCircle, DollarSign, Tag, Calendar, FileText } from 'lucide-react';
+import { PlusCircle, IndianRupee, Tag, Calendar, FileText } from 'lucide-react';
 
 // Available expense categories
 const CATEGORIES = ['Food', 'Travel', 'Bills', 'Shopping', 'Others'] as const;
@@ -75,20 +75,23 @@ const AddExpense = () => {
           {/* Amount Field */}
           <div className="space-y-2">
             <Label htmlFor="amount" className="flex items-center gap-2 text-foreground">
-              <DollarSign className="w-4 h-4 text-primary" />
-              Amount
+              <IndianRupee className="w-4 h-4 text-primary" />
+              Amount (₹)
             </Label>
-            <Input
-              id="amount"
-              type="number"
-              step="0.01"
-              min="0"
-              placeholder="0.00"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="text-lg h-12"
-              required
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">₹</span>
+              <Input
+                id="amount"
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder="0.00"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="text-lg h-12 pl-8"
+                required
+              />
+            </div>
           </div>
 
           {/* Category Field */}

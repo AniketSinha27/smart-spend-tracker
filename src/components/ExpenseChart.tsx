@@ -1,6 +1,7 @@
 // Pie chart component for category-wise expense distribution
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Expense } from '@/services/mockApi';
+import { formatINR } from '@/utils/currency';
 
 interface ExpenseChartProps {
   expenses: Expense[];
@@ -59,7 +60,7 @@ const ExpenseChart = ({ expenses }: ExpenseChartProps) => {
           ))}
         </Pie>
         <Tooltip 
-          formatter={(value: number) => [`$${value.toFixed(2)}`, 'Amount']}
+          formatter={(value: number) => [formatINR(value), 'Amount']}
           contentStyle={{ 
             backgroundColor: 'hsl(var(--card))', 
             border: '1px solid hsl(var(--border))',
