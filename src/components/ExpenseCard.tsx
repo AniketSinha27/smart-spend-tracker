@@ -1,6 +1,7 @@
 // Reusable expense list card component
 import { Expense } from '@/services/mockApi';
 import { Utensils, Car, Receipt, ShoppingBag, MoreHorizontal } from 'lucide-react';
+import { formatINR } from '@/utils/currency';
 
 interface ExpenseCardProps {
   expense: Expense;
@@ -20,7 +21,7 @@ const ExpenseCard = ({ expense }: ExpenseCardProps) => {
   const Icon = config.icon;
 
   // Format date to readable string
-  const formattedDate = new Date(expense.date).toLocaleDateString('en-US', {
+  const formattedDate = new Date(expense.date).toLocaleDateString('en-IN', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -47,7 +48,7 @@ const ExpenseCard = ({ expense }: ExpenseCardProps) => {
       {/* Amount */}
       <div className="text-right">
         <span className="text-lg font-bold text-expense-amount">
-          -${expense.amount.toFixed(2)}
+          -{formatINR(expense.amount)}
         </span>
       </div>
     </div>
